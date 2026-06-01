@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art Gallery — Creative Future</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/static/css/artgallery.css?v=8" />
+</head>
+<body class="page-template">
+  <div id="ag-header-mount"></div>
+  <button type="button" id="ag-menu-toggle" class="ag-mobile-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <div id="ag-mobile-drawer" class="ag-mobile-drawer" aria-hidden="true">
+    <div class="ag-mobile-drawer__panel">
+      <a href="/">Home</a><a href="/gallery">Gallery</a>
+      <a href="/exhibitions">Events</a><a href="/contacts">Contacts</a>
+      <button type="button" data-close-drawer>Close</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="ag-hero ag-hero--standard">
+      <div class="ag-wrap">
+        <div class="ag-hero-banner" role="group" aria-label="Gallery highlights">
+          <a href="/exhibitions" class="ag-hero-zone ag-hero-zone--events">
+            <span class="ag-hero-zone__title">Events</span>
+          </a>
+          <div class="ag-hero-zone ag-hero-zone--gallery">
+            <h1 class="ag-hero-zone__title">Art Gallery</h1>
+            <div class="ag-hero-zone__meta">
+              <a href="/gallery" class="ag-btn-tan">Learn more</a>
+            </div>
+          </div>
+          <a href="/contacts" class="ag-hero-zone ag-hero-zone--contacts">
+            <span class="ag-hero-zone__title">Contacts</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="ag-about">
+      <div class="ag-wrap ag-about__grid">
+        <div class="ag-about__media ag-about__video">
+          <iframe
+            src="https://www.youtube.com/embed/WBwNw4WjV7g"
+            title="About Art Gallery"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="ag-about__text">
+          <h2>About Us</h2>
+          <p>Founded with a passion for classical aesthetics, our gallery serves as a sanctuary for fine art enthusiasts and collectors alike.</p>
+          <p>We are dedicated to preserving and showcasing masterpieces that span centuries of artistic brilliance, from the meticulous realism of the Dutch Golden Age to the breathtaking emotional depths of the Romantic era.</p>
+          <div class="ag-hours">
+            <p>Weekdays: 9:00–20:00</p>
+            <p>Weekends: 11:00–18:00</p>
+          </div>
+          <a href="/contacts" class="ag-btn-outline">Buy tickets</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ag-works">
+      <div class="ag-wrap">
+        <div class="ag-works__head">
+          <h2>Works of Artists</h2>
+          <a href="/gallery">See All Works</a>
+        </div>
+        <div class="ag-works__grid" id="home-works-grid"></div>
+      </div>
+    </section>
+
+    <section class="ag-bottom">
+      <div class="ag-wrap ag-bottom__grid">
+        <div>
+          <h2>Our Prices</h2>
+          <div class="ag-price-row">
+            <strong>General Admission</strong>
+            <span class="price">$15</span>
+            <span class="dots"></span>
+            <p class="desc">Full access to the permanent collection, sculpture garden, and main gallery halls.</p>
+          </div>
+          <div class="ag-price-row">
+            <strong>Special Exhibition</strong>
+            <span class="price">$25</span>
+            <span class="dots"></span>
+            <p class="desc">Entry to our current premium temporary exhibition. Includes a complimentary digital audio guide.</p>
+          </div>
+          <div class="ag-price-row">
+            <strong>All-Access Day Pass</strong>
+            <span class="price">$35</span>
+            <span class="dots"></span>
+            <p class="desc">Ultimate one-day pass to all galleries, restricted exhibitions, and special events.</p>
+          </div>
+        </div>
+        <div>
+          <h2>Testimonials</h2>
+          <div class="ag-quote">
+            <p>The gallery exceeded all expectations — a truly inspiring space for fine art lovers. Every visit feels like a journey through history, revealing masterfully curated hidden gems.</p>
+            <div class="ag-quote__author">
+              <img src="/static/images/testimonial-author.png" alt="Azimbaeva Diana" />
+              <div>
+                <strong>Azimbaeva Diana</strong>
+                <span>Art Collector</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="ag-footer-mount"></div>
+
+  <script type="module" src="/static/js/home-template.js"></script>
+</body>
+</html>
