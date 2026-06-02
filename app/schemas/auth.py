@@ -16,7 +16,7 @@ class LoginRequest(BaseModel):
     def normalize_email(cls, v: str) -> str:
         email = v.strip().lower()
         if not _EMAIL_RE.match(email):
-            raise ValueError("Invalid email format")
+            raise ValueError("Некорректный формат email")
         return email
 
 
@@ -28,4 +28,4 @@ class UserRead(BaseModel):
 
 class LoginResponse(BaseModel):
     user: UserRead
-    message: str = "Login successful"
+    message: str = "Вход выполнен"

@@ -31,7 +31,7 @@ def patch_inquiry(
 ):
     inquiry = db.get(Inquiry, inquiry_id)
     if not inquiry:
-        raise HTTPException(status_code=404, detail="Inquiry not found")
+        raise HTTPException(status_code=404, detail="Обращение не найдено")
     inquiry.status = payload.status
     db.commit()
     db.refresh(inquiry)

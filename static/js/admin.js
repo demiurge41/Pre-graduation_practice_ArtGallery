@@ -9,11 +9,11 @@ let currentView = "dashboard";
 const api = (path, opts = {}) => fetch(path, { credentials: "include", ...opts });
 
 const viewTitles = {
-  dashboard: "Dashboard",
-  artworks: "Artworks",
-  artists: "Artists",
-  exhibitions: "Exhibitions",
-  inquiries: "Inquiries",
+  dashboard: "Обзор",
+  artworks: "Работы",
+  artists: "Художники",
+  exhibitions: "Выставки",
+  inquiries: "Обращения",
 };
 
 async function ensureAuth() {
@@ -67,44 +67,44 @@ async function renderDashboard() {
     api("/api/inquiries").then((r) => (r.ok ? r.json() : [])),
   ]);
 
-  const newInquiries = inquiriesRes.filter((q) => q.status === "New").length;
-  const currentExhibitions = exhibitions.filter((e) => e.status === "Current").length;
+  const newInquiries = inquiriesRes.filter((q) => q.status === "Новое").length;
+  const currentExhibitions = exhibitions.filter((e) => e.status === "Текущая").length;
 
   content.innerHTML = `
     <div class="admin-stats">
       <div class="admin-stat-card">
-        <div class="admin-stat-card__label">Artworks</div>
+        <div class="admin-stat-card__label">Работы</div>
         <div class="admin-stat-card__value">${artworks.length}</div>
-        <div class="admin-stat-card__hint">In public catalog</div>
+        <div class="admin-stat-card__hint">В публичном каталоге</div>
       </div>
       <div class="admin-stat-card">
-        <div class="admin-stat-card__label">Artists</div>
+        <div class="admin-stat-card__label">Художники</div>
         <div class="admin-stat-card__value">${artists.length}</div>
-        <div class="admin-stat-card__hint">Profiles on site</div>
+        <div class="admin-stat-card__hint">Профили на сайте</div>
       </div>
       <div class="admin-stat-card admin-stat-card--accent">
-        <div class="admin-stat-card__label">Events</div>
+        <div class="admin-stat-card__label">События</div>
         <div class="admin-stat-card__value">${exhibitions.length}</div>
-        <div class="admin-stat-card__hint">${currentExhibitions} currently active</div>
+        <div class="admin-stat-card__hint">${currentExhibitions} сейчас активны</div>
       </div>
       <div class="admin-stat-card ${newInquiries ? "admin-stat-card--alert" : ""}">
-        <div class="admin-stat-card__label">New inquiries</div>
+        <div class="admin-stat-card__label">Новые обращения</div>
         <div class="admin-stat-card__value">${newInquiries}</div>
-        <div class="admin-stat-card__hint">Awaiting response</div>
+        <div class="admin-stat-card__hint">Ожидают ответа</div>
       </div>
     </div>
     <div class="admin-panel-grid">
       <section class="admin-panel">
-        <h2>Quick actions</h2>
+        <h2>Быстрые действия</h2>
         <div class="admin-quick-links">
-          <button type="button" data-goto="artworks" data-action="add-artwork"><i class="fa-solid fa-plus"></i> Add artwork</button>
-          <button type="button" data-goto="artists" data-action="add-artist"><i class="fa-solid fa-plus"></i> Add artist</button>
-          <button type="button" data-goto="exhibitions" data-action="add-exhibition"><i class="fa-solid fa-plus"></i> Add event</button>
-          <a href="/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> View public site</a>
+          <button type="button" data-goto="artworks" data-action="add-artwork"><i class="fa-solid fa-plus"></i> Добавить работу</button>
+          <button type="button" data-goto="artists" data-action="add-artist"><i class="fa-solid fa-plus"></i> Добавить художника</button>
+          <button type="button" data-goto="exhibitions" data-action="add-exhibition"><i class="fa-solid fa-plus"></i> Добавить событие</button>
+          <a href="/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Открыть сайт</a>
         </div>
       </section>
       <section class="admin-panel">
-        <h2>Recent inquiries</h2>
+        <h2>Последние обращения</h2>
         ${
           inquiriesRes.length
             ? `<ul style="list-style:none;margin:0;padding:0">${inquiriesRes
@@ -112,13 +112,13 @@ async function renderDashboard() {
                 .map(
                   (q) => `<li style="padding:10px 0;border-bottom:1px solid #f0f0f0">
                 <strong>${esc(q.visitor_name)}</strong>
-                ${q.status === "New" ? '<span class="admin-badge admin-badge--new">New</span>' : ""}
-                <br><small style="color:#888">${new Date(q.created_at).toLocaleString()}</small>
+                ${q.status === "Новое" ? '<span class="admin-badge admin-badge--new">Новое</span>' : ""}
+                <br><small style="color:#888">${new Date(q.created_at).toLocaleString("ru-RU")}</small>
               </li>`
                 )
                 .join("")}</ul>
-            <button type="button" class="admin-btn admin-btn--ghost" style="margin-top:16px" data-goto="inquiries">All inquiries</button>`
-            : '<p style="color:#666;margin:0">No messages yet.</p>'
+            <button type="button" class="admin-btn admin-btn--ghost" style="margin-top:16px" data-goto="inquiries">Все обращения</button>`
+            : '<p style="color:#666;margin:0">Сообщений пока нет.</p>'
         }
       </section>
     </div>`;
@@ -141,8 +141,8 @@ function toolbarHtml(label, id) {
 
 function actionsHtml(resource, id, canEdit = true) {
   return `<div class="admin-table__actions">
-    ${canEdit ? `<button class="admin-icon-btn" data-edit="${resource}" data-id="${id}" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>` : ""}
-    <button class="admin-icon-btn admin-icon-btn--danger" data-del="${resource}" data-id="${id}" aria-label="Delete"><i class="fa-solid fa-trash"></i></button>
+    ${canEdit ? `<button class="admin-icon-btn" data-edit="${resource}" data-id="${id}" aria-label="Редактировать"><i class="fa-solid fa-pen"></i></button>` : ""}
+    <button class="admin-icon-btn admin-icon-btn--danger" data-del="${resource}" data-id="${id}" aria-label="Удалить"><i class="fa-solid fa-trash"></i></button>
   </div>`;
 }
 
@@ -150,14 +150,14 @@ async function renderArtworksTable() {
   const rows = await (await api("/api/artworks")).json();
   if (!rows.length) {
     content.innerHTML =
-      toolbarHtml("Add artwork", "add-artwork") +
-      '<p class="admin-empty">No artworks yet. Add your first piece or create an artist first.</p>';
+      toolbarHtml("Добавить работу", "add-artwork") +
+      '<p class="admin-empty">Работ пока нет. Добавьте первую или сначала создайте художника.</p>';
     document.getElementById("add-artwork")?.addEventListener("click", () => openArtworkForm());
     return;
   }
   content.innerHTML =
-    toolbarHtml("Add artwork", "add-artwork") +
-    `<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Image</th><th>Title</th><th>Artist</th><th>Status</th><th>Actions</th></tr></thead>
+    toolbarHtml("Добавить работу", "add-artwork") +
+    `<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Изображение</th><th>Название</th><th>Художник</th><th>Статус</th><th>Действия</th></tr></thead>
     <tbody>${rows
       .map(
         (r) => `<tr>
@@ -174,15 +174,15 @@ async function renderArtistsTable() {
   const rows = await (await api("/api/artists")).json();
   if (!rows.length) {
     content.innerHTML =
-      toolbarHtml("Add artist", "add-artist") +
-      '<p class="admin-empty">No artists. Add at least one before creating artworks.</p>';
+      toolbarHtml("Добавить художника", "add-artist") +
+      '<p class="admin-empty">Художников нет. Добавьте хотя бы одного перед созданием работ.</p>';
     document.getElementById("add-artist")?.addEventListener("click", () => openArtistForm());
     return;
   }
   const full = await Promise.all(rows.map((r) => api(`/api/artists/${r.id}`).then((res) => res.json())));
   content.innerHTML =
-    toolbarHtml("Add artist", "add-artist") +
-    `<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Name</th><th>Born</th><th>Actions</th></tr></thead>
+    toolbarHtml("Добавить художника", "add-artist") +
+    `<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Имя</th><th>Год рождения</th><th>Действия</th></tr></thead>
     <tbody>${full
       .map(
         (r) => `<tr>
@@ -199,14 +199,14 @@ async function renderExhibitionsTable() {
   const rows = await (await api("/api/exhibitions")).json();
   if (!rows.length) {
     content.innerHTML =
-      toolbarHtml("Add event", "add-exhibition") +
-      '<p class="admin-empty">No events yet. Create an exhibition for the Events page.</p>';
+      toolbarHtml("Добавить событие", "add-exhibition") +
+      '<p class="admin-empty">Событий пока нет. Создайте выставку для страницы «События».</p>';
     document.getElementById("add-exhibition")?.addEventListener("click", () => openExhibitionForm());
     return;
   }
   content.innerHTML =
-    toolbarHtml("Add event", "add-exhibition") +
-    `<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Title</th><th>Status</th><th>Dates</th><th>Actions</th></tr></thead>
+    toolbarHtml("Добавить событие", "add-exhibition") +
+    `<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Название</th><th>Статус</th><th>Даты</th><th>Действия</th></tr></thead>
     <tbody>${rows
       .map(
         (r) => `<tr>
@@ -229,26 +229,26 @@ async function renderInquiries() {
     <details class="admin-inquiry">
       <summary>
         <strong>${esc(q.visitor_name)}</strong> — <a href="mailto:${esc(q.visitor_email)}">${esc(q.visitor_email)}</a>
-        ${q.status === "New" ? '<span class="admin-badge admin-badge--new">New</span>' : q.status === "Responded" ? '<span class="admin-badge admin-badge--ok">Responded</span>' : ""}
-        <small style="margin-left:8px;color:#888">${new Date(q.created_at).toLocaleString()}</small>
+        ${q.status === "Новое" ? '<span class="admin-badge admin-badge--new">Новое</span>' : q.status === "Отвечено" ? '<span class="admin-badge admin-badge--ok">Отвечено</span>' : ""}
+        <small style="margin-left:8px;color:#888">${new Date(q.created_at).toLocaleString("ru-RU")}</small>
       </summary>
       <div class="admin-inquiry__body">
         <p>${esc(q.message)}</p>
-        ${q.status !== "Responded" ? `<button type="button" class="admin-btn admin-btn--primary" data-respond="${q.id}">Mark as responded</button>` : ""}
+        ${q.status !== "Отвечено" ? `<button type="button" class="admin-btn admin-btn--primary" data-respond="${q.id}">Отметить как отвеченное</button>` : ""}
       </div>
     </details>`
         )
         .join("")
-    : '<p class="admin-empty">No inquiries yet.</p>';
+    : '<p class="admin-empty">Обращений пока нет.</p>';
 
   content.querySelectorAll("[data-respond]").forEach((btn) => {
     btn.addEventListener("click", async () => {
       await api(`/api/inquiries/${btn.dataset.respond}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "Responded" }),
+        body: JSON.stringify({ status: "Отвечено" }),
       });
-      showToast("Marked as responded");
+      showToast("Отмечено как отвеченное");
       renderInquiries();
     });
   });
@@ -277,10 +277,10 @@ document.getElementById("confirm-delete")?.addEventListener("click", async () =>
   const res = await api(`/api/${deleteResource}/${deleteId}`, { method: "DELETE" });
   closeModal("confirm-modal");
   if (!res.ok) {
-    showToast("Delete failed — item may be in use");
+    showToast("Не удалось удалить — запись может использоваться");
     return;
   }
-  showToast("Record removed");
+  showToast("Запись удалена");
   loadView(currentView);
 });
 
@@ -321,10 +321,10 @@ function bindUploadZone(zone, urlInput, preview) {
 function uploadFieldHtml(inputName, previewId) {
   return `
     <div class="form-field upload-zone" data-upload-zone>
-      <p>Drag image or <label style="cursor:pointer;color:#c9a86c"><input type="file" accept="image/*" hidden /> browse</label></p>
+      <p>Перетащите изображение или <label style="cursor:pointer;color:#c9a86c"><input type="file" accept="image/*" hidden /> выберите файл</label></p>
       <img id="${previewId}" hidden alt="" />
     </div>
-    <div class="form-field"><label>Image URL</label><input name="${inputName}" /></div>`;
+    <div class="form-field"><label>URL изображения</label><input name="${inputName}" /></div>`;
 }
 
 async function openArtistForm(id = null) {
@@ -339,17 +339,17 @@ async function openArtistForm(id = null) {
   if (id) data = await (await api(`/api/artists/${id}`)).json();
 
   const modal = document.getElementById("entity-modal");
-  document.getElementById("entity-modal-title").textContent = id ? "Edit artist" : "Add artist";
+  document.getElementById("entity-modal-title").textContent = id ? "Редактировать художника" : "Добавить художника";
   const form = document.getElementById("entity-form");
   form.className = "admin-form";
   form.innerHTML = `
-    <div class="form-field"><label>Full name</label><input name="full_name" required value="${esc(data.full_name)}" /></div>
-    <div class="form-field"><label>Birth year</label><input name="birth_year" type="number" min="1000" max="2100" value="${data.birth_year ?? ""}" /></div>
-    <div class="form-field"><label>Death year</label><input name="death_year" type="number" min="1000" max="2100" value="${data.death_year ?? ""}" /></div>
+    <div class="form-field"><label>Полное имя</label><input name="full_name" required value="${esc(data.full_name)}" /></div>
+    <div class="form-field"><label>Год рождения</label><input name="birth_year" type="number" min="1000" max="2100" value="${data.birth_year ?? ""}" /></div>
+    <div class="form-field"><label>Год смерти</label><input name="death_year" type="number" min="1000" max="2100" value="${data.death_year ?? ""}" /></div>
     ${uploadFieldHtml("profile_image_url", "artist-preview")}
-    <div class="form-field"><label>Video URL (YouTube embed)</label><input name="video_interview_url" value="${esc(data.video_interview_url || "")}" placeholder="https://www.youtube.com/embed/..." /></div>
-    <div class="form-field"><label>Biography</label><textarea name="biography">${esc(data.biography || "")}</textarea></div>
-    <button type="submit" class="admin-btn admin-btn--primary">Save artist</button>`;
+    <div class="form-field"><label>URL видео (встраивание YouTube)</label><input name="video_interview_url" value="${esc(data.video_interview_url || "")}" placeholder="https://www.youtube.com/embed/..." /></div>
+    <div class="form-field"><label>Биография</label><textarea name="biography">${esc(data.biography || "")}</textarea></div>
+    <button type="submit" class="admin-btn admin-btn--primary">Сохранить художника</button>`;
 
   form.profile_image_url.value = data.profile_image_url || "";
   const preview = form.querySelector("#artist-preview");
@@ -376,11 +376,11 @@ async function openArtistForm(id = null) {
       body: JSON.stringify(body),
     });
     if (!res.ok) {
-      showToast("Save failed");
+      showToast("Не удалось сохранить");
       return;
     }
     closeModal("entity-modal");
-    showToast(id ? "Artist updated" : "Artist created");
+    showToast(id ? "Художник обновлён" : "Художник добавлен");
     loadView("artists");
   };
   openModal("entity-modal");
@@ -393,30 +393,30 @@ async function openExhibitionForm(id = null) {
     start_date: "",
     end_date: "",
     cover_image_url: "",
-    status: "Upcoming",
+    status: "Предстоящая",
   };
   if (id) data = await (await api(`/api/exhibitions/${id}`)).json();
 
   const modal = document.getElementById("entity-modal");
-  document.getElementById("entity-modal-title").textContent = id ? "Edit event" : "Add event";
+  document.getElementById("entity-modal-title").textContent = id ? "Редактировать событие" : "Добавить событие";
   const form = document.getElementById("entity-form");
   form.className = "admin-form";
   form.innerHTML = `
-    <div class="form-field"><label>Title</label><input name="title" required value="${esc(data.title)}" /></div>
-    <div class="form-field"><label>Status</label>
+    <div class="form-field"><label>Название</label><input name="title" required value="${esc(data.title)}" /></div>
+    <div class="form-field"><label>Статус</label>
       <select name="status">
-        <option value="Upcoming">Upcoming</option>
-        <option value="Current">Current</option>
-        <option value="Past">Past</option>
+        <option value="Предстоящая">Предстоящая</option>
+        <option value="Текущая">Текущая</option>
+        <option value="Прошедшая">Прошедшая</option>
       </select>
     </div>
-    <div class="form-field"><label>Start date</label><input name="start_date" type="date" required value="${data.start_date || ""}" /></div>
-    <div class="form-field"><label>End date</label><input name="end_date" type="date" required value="${data.end_date || ""}" /></div>
+    <div class="form-field"><label>Дата начала</label><input name="start_date" type="date" required value="${data.start_date || ""}" /></div>
+    <div class="form-field"><label>Дата окончания</label><input name="end_date" type="date" required value="${data.end_date || ""}" /></div>
     ${uploadFieldHtml("cover_image_url", "exhibition-preview")}
-    <div class="form-field"><label>Description</label><textarea name="description">${esc(data.description || "")}</textarea></div>
-    <button type="submit" class="admin-btn admin-btn--primary">Save event</button>`;
+    <div class="form-field"><label>Описание</label><textarea name="description">${esc(data.description || "")}</textarea></div>
+    <button type="submit" class="admin-btn admin-btn--primary">Сохранить событие</button>`;
 
-  form.status.value = data.status || "Upcoming";
+  form.status.value = data.status || "Предстоящая";
   form.cover_image_url.value = data.cover_image_url || "";
   const preview = form.querySelector("#exhibition-preview");
   if (data.cover_image_url) {
@@ -442,11 +442,11 @@ async function openExhibitionForm(id = null) {
       body: JSON.stringify(body),
     });
     if (!res.ok) {
-      showToast("Save failed");
+      showToast("Не удалось сохранить");
       return;
     }
     closeModal("entity-modal");
-    showToast(id ? "Event updated" : "Event created");
+    showToast(id ? "Событие обновлено" : "Событие создано");
     loadView("exhibitions");
   };
   openModal("entity-modal");
@@ -455,7 +455,7 @@ async function openExhibitionForm(id = null) {
 async function openArtworkForm(id = null) {
   const artists = await (await api("/api/artists")).json();
   if (!artists.length) {
-    showToast("Create an artist first");
+    showToast("Сначала создайте художника");
     loadView("artists");
     setTimeout(() => openArtistForm(), 200);
     return;
@@ -469,33 +469,33 @@ async function openArtworkForm(id = null) {
     dimensions: "",
     description: "",
     creation_story: "",
-    status: "In Gallery",
+    status: "В галерее",
     image_url: "",
   };
   if (id) data = await (await api(`/api/artworks/${id}`)).json();
 
   const modal = document.getElementById("entity-modal");
-  document.getElementById("entity-modal-title").textContent = id ? "Edit artwork" : "Add artwork";
+  document.getElementById("entity-modal-title").textContent = id ? "Редактировать работу" : "Добавить работу";
   const form = document.getElementById("entity-form");
   form.className = "admin-form";
   form.innerHTML = `
-    <div class="form-field"><label>Title</label><input name="title" required value="${esc(data.title)}" /></div>
-    <div class="form-field"><label>Artist</label><select name="artist_id">${artists
+    <div class="form-field"><label>Название</label><input name="title" required value="${esc(data.title)}" /></div>
+    <div class="form-field"><label>Художник</label><select name="artist_id">${artists
       .map((a) => `<option value="${a.id}" ${a.id === data.artist_id ? "selected" : ""}>${esc(a.full_name)}</option>`)
       .join("")}</select></div>
-    <div class="form-field"><label>Year</label><input name="year" type="number" value="${data.year ?? ""}" /></div>
-    <div class="form-field"><label>Medium</label><input name="medium" list="medium-list" value="${esc(data.medium || "")}" />
-      <datalist id="medium-list"><option>Oil on Canvas</option><option>Sculpture</option><option>Digital</option><option>Photography</option></datalist></div>
-    <div class="form-field"><label>Dimensions</label><input name="dimensions" value="${esc(data.dimensions || "")}" /></div>
+    <div class="form-field"><label>Год</label><input name="year" type="number" value="${data.year ?? ""}" /></div>
+    <div class="form-field"><label>Техника</label><input name="medium" list="medium-list" value="${esc(data.medium || "")}" />
+      <datalist id="medium-list"><option>Масло на холсте</option><option>Скульптура</option><option>Цифровое искусство</option><option>Фотография</option></datalist></div>
+    <div class="form-field"><label>Размеры</label><input name="dimensions" value="${esc(data.dimensions || "")}" /></div>
     ${uploadFieldHtml("image_url", "artwork-preview")}
-    <div class="form-field"><label>Description</label><textarea name="description">${esc(data.description || "")}</textarea></div>
-    <div class="form-field"><label>Creation story</label><textarea name="creation_story">${esc(data.creation_story || "")}</textarea></div>
-    <div class="form-field"><label>Status</label><select name="status">
-      <option>In Gallery</option><option>On Exhibition</option><option>In Storage</option>
+    <div class="form-field"><label>Описание</label><textarea name="description">${esc(data.description || "")}</textarea></div>
+    <div class="form-field"><label>История создания</label><textarea name="creation_story">${esc(data.creation_story || "")}</textarea></div>
+    <div class="form-field"><label>Статус</label><select name="status">
+      <option>В галерее</option><option>На выставке</option><option>На хранении</option>
     </select></div>
-    <button type="submit" class="admin-btn admin-btn--primary">Save artwork</button>`;
+    <button type="submit" class="admin-btn admin-btn--primary">Сохранить работу</button>`;
 
-  form.querySelector('[name="status"]').value = data.status || "In Gallery";
+  form.querySelector('[name="status"]').value = data.status || "В галерее";
   form.image_url.value = data.image_url || "";
   const preview = form.querySelector("#artwork-preview");
   if (data.image_url) {
@@ -524,11 +524,11 @@ async function openArtworkForm(id = null) {
       body: JSON.stringify(body),
     });
     if (!res.ok) {
-      showToast("Save failed");
+      showToast("Не удалось сохранить");
       return;
     }
     closeModal("entity-modal");
-    showToast("Saved");
+    showToast("Сохранено");
     loadView("artworks");
   };
   openModal("entity-modal");

@@ -1,59 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gallery — Art Gallery</title>
+  <title>Галерея — Художественная галерея</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" />
   <link rel="stylesheet" href="/static/css/artgallery.css?v=8" />
 </head>
 <body class="page-template" data-page="gallery">
   <div id="ag-header-mount"></div>
-  <button type="button" id="ag-menu-toggle" class="ag-mobile-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <button type="button" id="ag-menu-toggle" class="ag-mobile-toggle" aria-label="Меню"><i class="fa-solid fa-bars"></i></button>
   <div id="ag-mobile-drawer" class="ag-mobile-drawer" aria-hidden="true">
     <div class="ag-mobile-drawer__panel">
-      <a href="/">Home</a><a href="/gallery">Gallery</a><a href="/exhibitions">Events</a><a href="/contacts">Contacts</a>
-      <button type="button" data-close-drawer>Close</button>
+      <a href="/">Главная</a><a href="/gallery">Галерея</a><a href="/exhibitions">События</a><a href="/contacts">Контакты</a>
+      <button type="button" data-close-drawer>Закрыть</button>
     </div>
   </div>
 
   <main class="ag-page">
     <div class="ag-wrap">
       <div class="ag-search-bar">
-        <input id="search-input" type="search" placeholder="Search title or artist…" autocomplete="off" />
+        <input id="search-input" type="search" placeholder="Поиск по названию или автору…" autocomplete="off" />
         <ul id="search-dropdown" class="search-dropdown" style="display:none"></ul>
       </div>
       <div class="ag-layout-catalog">
-        <aside class="ag-filters filters filters--desktop" aria-label="Filters">
-          <h2>Filters</h2>
+        <aside class="ag-filters filters filters--desktop" aria-label="Фильтры">
+          <h2>Фильтры</h2>
           <section class="ag-filter-section">
-            <strong class="ag-filter-section__title">Artist</strong>
+            <strong class="ag-filter-section__title">Художник</strong>
             <div class="filter-options filter-artists-root"></div>
           </section>
           <section class="ag-filter-section">
-            <strong class="ag-filter-section__title">Medium</strong>
+            <strong class="ag-filter-section__title">Техника</strong>
             <div class="filter-options filter-media-root"></div>
           </section>
           <section class="ag-filter-section ag-filter-period">
-            <strong class="ag-filter-section__title">Period</strong>
+            <strong class="ag-filter-section__title">Период</strong>
             <div class="ag-filter-period__fields">
               <div class="ag-filter-period__field">
-                <label for="filter-year-from">From</label>
-                <input id="filter-year-from" type="number" min="1800" max="2100" placeholder="e.g. 1900" />
+                <label for="filter-year-from">С</label>
+                <input id="filter-year-from" type="number" min="1800" max="2100" placeholder="напр. 1900" />
               </div>
               <div class="ag-filter-period__field">
-                <label for="filter-year-to">To</label>
-                <input id="filter-year-to" type="number" min="1800" max="2100" placeholder="e.g. 2025" />
+                <label for="filter-year-to">По</label>
+                <input id="filter-year-to" type="number" min="1800" max="2100" placeholder="напр. 2025" />
               </div>
             </div>
           </section>
           <section class="ag-filter-section">
-            <strong class="ag-filter-section__title">Status</strong>
+            <strong class="ag-filter-section__title">Статус</strong>
             <div class="filter-options">
-              <label><input type="radio" name="status" value="In Gallery" /> In Gallery</label>
-              <label><input type="radio" name="status" value="On Exhibition" /> On Exhibition</label>
-              <label><input type="radio" name="status" value="In Storage" /> In Storage</label>
-              <label><input type="radio" name="status" value="all" checked /> Any</label>
+              <label><input type="radio" name="status" value="В галерее" /> В галерее</label>
+              <label><input type="radio" name="status" value="На выставке" /> На выставке</label>
+              <label><input type="radio" name="status" value="На хранении" /> На хранении</label>
+              <label><input type="radio" name="status" value="all" checked /> Любой</label>
             </div>
           </section>
         </aside>
@@ -65,18 +65,18 @@
   </main>
 
   <div id="ag-footer-mount"></div>
-  <button type="button" id="inquire-fab" class="ag-inquire-fab">Inquire</button>
+  <button type="button" id="inquire-fab" class="ag-inquire-fab">Написать</button>
   <div id="inquire-drawer" class="ag-mobile-drawer" aria-hidden="true">
     <div class="ag-mobile-drawer__panel ag-form" style="left:0;right:0;top:auto;bottom:0;width:100%;max-width:480px;margin:0 auto;height:auto;max-height:85vh">
-      <h2>Send inquiry</h2>
+      <h2>Задать вопрос</h2>
       <form id="inquiry-form" novalidate>
-        <div class="form-field"><label>Name</label><input name="visitor_name" required /></div>
+        <div class="form-field"><label>Имя</label><input name="visitor_name" required /></div>
         <div class="form-field"><label>Email</label><input name="visitor_email" type="email" required /></div>
-        <div class="form-field"><label>Artwork</label><select id="inquiry-artwork" name="artwork_reference_id"></select></div>
-        <div class="form-field"><label>Message</label><textarea name="message" required></textarea></div>
+        <div class="form-field"><label>Работа</label><select id="inquiry-artwork" name="artwork_reference_id"></select></div>
+        <div class="form-field"><label>Сообщение</label><textarea name="message" required></textarea></div>
         <p class="ag-form-error form-error"></p>
-        <button type="submit" class="ag-btn-tan">Send</button>
-        <button type="button" data-close>Cancel</button>
+        <button type="submit" class="ag-btn-tan">Отправить</button>
+        <button type="button" data-close>Отмена</button>
       </form>
     </div>
   </div>

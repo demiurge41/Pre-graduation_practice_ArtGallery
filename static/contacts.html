@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacts — Art Gallery</title>
+  <title>Контакты — Художественная галерея</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" />
   <link rel="stylesheet" href="/static/css/artgallery.css?v=8" />
 </head>
 <body class="page-template" data-page="contacts">
   <div id="ag-header-mount"></div>
-  <button type="button" id="ag-menu-toggle" class="ag-mobile-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <button type="button" id="ag-menu-toggle" class="ag-mobile-toggle" aria-label="Меню"><i class="fa-solid fa-bars"></i></button>
   <div id="ag-mobile-drawer" class="ag-mobile-drawer" aria-hidden="true">
     <div class="ag-mobile-drawer__panel">
-      <a href="/">Home</a><a href="/contacts">Contacts</a>
-      <button type="button" data-close-drawer>Close</button>
+      <a href="/">Главная</a><a href="/contacts">Контакты</a>
+      <button type="button" data-close-drawer>Закрыть</button>
     </div>
   </div>
 
@@ -21,29 +21,29 @@
     <div class="ag-wrap">
       <div class="ag-bottom__grid ag-page-blocks">
         <div class="card-surface location-card">
-          <h2 class="section-title">Location</h2>
+          <h2 class="section-title">Местоположение</h2>
           <ul class="info-list">
-            <li><i class="fa-solid fa-location-dot"></i> Trafalgar Square, London WC2N 5DN</li>
-            <li><i class="fa-solid fa-phone"></i> <a href="tel:+18001234567">1-800-1234-567</a></li>
+            <li><i class="fa-solid fa-location-dot"></i> Бишкек, ул. Ак-Ордо, 40</li>
+            <li><i class="fa-solid fa-phone"></i> <a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
             <li><i class="fa-solid fa-envelope"></i> <a href="mailto:info@artgallery.com">info@artgallery.com</a></li>
           </ul>
-          <p class="text-muted">Weekdays: 9:00–20:00 · Weekends: 11:00–18:00</p>
+          <p class="text-muted">Будни: 9:00–20:00 · Выходные: 11:00–18:00</p>
           <div class="ag-map">
             <iframe
-              title="Gallery location on map"
+              title="Галерея на карте"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=Trafalgar+Square,+London+WC2N+5DN,+United+Kingdom&output=embed"
+              src="https://www.google.com/maps?q=Бишкек,+ул.+Ак-Орго,+12&output=embed"
             ></iframe>
           </div>
         </div>
         <form id="contacts-form" class="card-surface ag-form contact-form-card" novalidate>
-          <h2 class="section-title">Contact Form</h2>
-          <div class="form-field"><label>Name</label><input name="visitor_name" required /></div>
+          <h2 class="section-title">Форма обратной связи</h2>
+          <div class="form-field"><label>Имя</label><input name="visitor_name" required /></div>
           <div class="form-field"><label>Email</label><input name="visitor_email" type="email" required /></div>
-          <div class="form-field"><label>Message</label><textarea name="message" rows="5" required></textarea></div>
+          <div class="form-field"><label>Сообщение</label><textarea name="message" rows="5" required></textarea></div>
           <p class="ag-form-error form-error" role="alert"></p>
-          <button type="submit" class="ag-btn-tan">Send</button>
+          <button type="submit" class="ag-btn-tan">Отправить</button>
         </form>
       </div>
     </div>

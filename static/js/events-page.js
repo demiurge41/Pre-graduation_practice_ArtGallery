@@ -7,8 +7,8 @@ function escapeHtml(s) {
 }
 
 function badgeClass(status) {
-  if (status === "Current") return "ev-badge--current";
-  if (status === "Upcoming") return "ev-badge--upcoming";
+  if (status === "Текущая") return "ev-badge--current";
+  if (status === "Предстоящая") return "ev-badge--upcoming";
   return "ev-badge--past";
 }
 
@@ -16,13 +16,13 @@ function formatDateRange(start, end) {
   const fmt = (s) => {
     const d = new Date(`${s}T12:00:00`);
     if (Number.isNaN(d.getTime())) return s;
-    return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    return d.toLocaleDateString("ru-RU", { day: "numeric", month: "short", year: "numeric" });
   };
   return `${fmt(start)} — ${fmt(end)}`;
 }
 
 function setModalRsvp(modal, status) {
-  const isPast = status === "Past";
+  const isPast = status === "Прошедшая";
   modal.querySelector(".rsvp-form-wrap")?.toggleAttribute("hidden", isPast);
   modal.querySelector(".rsvp-success")?.setAttribute("hidden", "");
   modal.querySelector("#rsvp-form")?.reset();
@@ -38,7 +38,7 @@ export async function initEventsPage() {
   const items = await res.json();
 
   if (!items.length) {
-    list.innerHTML = '<p class="ev-empty">No events scheduled.</p>';
+    list.innerHTML = '<p class="ev-empty">Событий пока нет.</p>';
     return;
   }
 
@@ -58,7 +58,7 @@ export async function initEventsPage() {
         <h2 class="ev-card__title">${escapeHtml(e.title)}</h2>
         <p class="ev-card__text">${escapeHtml((e.description || "").slice(0, 240))}${(e.description || "").length > 240 ? "…" : ""}</p>
         <button type="button" class="ev-card__btn" data-view="${e.id}">
-          View Event Details <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          Подробнее о событии <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
         </button>
       </div>
     </article>`

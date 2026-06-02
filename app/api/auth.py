@@ -15,7 +15,7 @@ router = APIRouter(prefix="/api/auth", tags=["auth"])
 def login(payload: LoginRequest, request: Request, db: DbSession):
     user = db.scalar(select(User).where(User.email == payload.email))
     if not user or not verify_password(payload.password, user.password_hash):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Неверные учётные данные")
     request.session["user_id"] = str(user.id)
     return LoginResponse(
         user=UserRead(id=str(user.id), email=user.email, role=user.role),
@@ -25,7 +25,7 @@ def login(payload: LoginRequest, request: Request, db: DbSession):
 @router.post("/logout")
 def logout(request: Request):
     request.session.clear()
-    return {"message": "Logged out"}
+    return {"message": "Выход выполнен"}
 
 
 @router.get("/me", response_model=UserRead)
