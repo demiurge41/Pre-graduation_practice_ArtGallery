@@ -14,24 +14,24 @@ DbSession = Annotated[Session, Depends(get_db)]
 def get_current_user(request: Request, db: DbSession) -> User:
     raw_id = request.session.get("user_id")
     if not raw_id:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Требуется авторизация")
     try:
         user_id = UUID(str(raw_id))
     except ValueError as exc:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid session") from exc
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Недействительная сессия") from exc
     user = db.get(User, user_id)
     if not user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid session")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Недействительная сессия")
     return user
 
 
 def require_staff(user: Annotated[User, Depends(get_current_user)]) -> User:
     if user.role not in (UserRole.STAFF, UserRole.ADMIN):
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Insufficient permissions")
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Недостаточно прав")
     return user
 
 
 def require_admin(user: Annotated[User, Depends(get_current_user)]) -> User:
     if user.role != UserRole.ADMIN:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin only")
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Только для администратора")
     return user

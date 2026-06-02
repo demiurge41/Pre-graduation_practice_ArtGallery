@@ -1,26 +1,16 @@
 import { bindImageFallbacks, imgOnError } from "./images.js";
 
 const LABELS = {
-  medium: "Medium",
-  year: "Year",
-  status: "Status",
-  dimensions: "Dimensions",
-};
-
-const STATUS_LABELS = {
-  "In Gallery": "In gallery",
-  "On Exhibition": "On exhibition",
-  "In Storage": "In storage",
+  medium: "Техника",
+  year: "Год",
+  status: "Статус",
+  dimensions: "Размеры",
 };
 
 function artworkIdFromPath() {
   const parts = window.location.pathname.split("/").filter(Boolean);
   const i = parts.indexOf("gallery");
   return i >= 0 && parts[i + 1] ? parts[i + 1] : null;
-}
-
-function statusLabel(status) {
-  return STATUS_LABELS[status] || status;
 }
 
 export async function initArtworkPage() {
@@ -35,7 +25,7 @@ export async function initArtworkPage() {
     return;
   }
   const a = await res.json();
-  document.title = `${a.title} — Atelier Nova`;
+  document.title = `${a.title} — Художественная галерея`;
   const img = document.getElementById("artwork-image");
   img.src = a.image_url || "";
   img.alt = a.title;
@@ -47,7 +37,7 @@ export async function initArtworkPage() {
   document.getElementById("artwork-meta").innerHTML = [
     [LABELS.medium, a.medium || "—"],
     [LABELS.year, a.year ?? "—"],
-    [LABELS.status, statusLabel(a.status)],
+    [LABELS.status, a.status || "—"],
     [LABELS.dimensions, a.dimensions || "—"],
   ]
     .map(
@@ -60,7 +50,7 @@ export async function initArtworkPage() {
     .join("");
   document.getElementById("artwork-description").textContent = a.description || "—";
   document.getElementById("artwork-story").textContent =
-    a.creation_story || "Story coming soon.";
+    a.creation_story || "История появится позже.";
   const bioBlock = document.getElementById("artist-bio-block");
   if (a.artist_biography) {
     bioBlock.hidden = false;

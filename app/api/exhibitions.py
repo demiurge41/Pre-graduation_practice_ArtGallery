@@ -20,7 +20,7 @@ def list_exhibitions(db: DbSession):
 def get_exhibition(exhibition_id: UUID, db: DbSession):
     exhibition = db.get(Exhibition, exhibition_id)
     if not exhibition:
-        raise HTTPException(status_code=404, detail="Exhibition not found")
+        raise HTTPException(status_code=404, detail="Выставка не найдена")
     return exhibition
 
 
@@ -39,7 +39,7 @@ def update_exhibition(
 ):
     exhibition = db.get(Exhibition, exhibition_id)
     if not exhibition:
-        raise HTTPException(status_code=404, detail="Exhibition not found")
+        raise HTTPException(status_code=404, detail="Выставка не найдена")
     for key, value in payload.model_dump(exclude_unset=True).items():
         setattr(exhibition, key, value)
     db.commit()
@@ -51,6 +51,6 @@ def update_exhibition(
 def delete_exhibition(exhibition_id: UUID, db: DbSession, _: object = Depends(require_staff)):
     exhibition = db.get(Exhibition, exhibition_id)
     if not exhibition:
-        raise HTTPException(status_code=404, detail="Exhibition not found")
+        raise HTTPException(status_code=404, detail="Выставка не найдена")
     db.delete(exhibition)
     db.commit()

@@ -8,7 +8,7 @@ export async function initInquiry(artworks = []) {
 
   if (select && artworks.length) {
     select.innerHTML =
-      '<option value="">— Optional —</option>' +
+      '<option value="">— Необязательно —</option>' +
       artworks.map((a) => `<option value="${a.id}">${a.title}</option>`).join("");
   }
 
@@ -37,11 +37,11 @@ export async function initInquiry(artworks = []) {
     const err = form.querySelector(".form-error");
     err.textContent = "";
     if (!name || !message) {
-      err.textContent = "Please fill in all required fields.";
+      err.textContent = "Заполните все обязательные поля.";
       return;
     }
     if (!validateEmail(email)) {
-      err.textContent = "Please enter a valid email address.";
+      err.textContent = "Введите корректный адрес email.";
       return;
     }
     const body = {
@@ -56,11 +56,11 @@ export async function initInquiry(artworks = []) {
       body: JSON.stringify(body),
     });
     if (!res.ok) {
-      err.textContent = "Could not send message. Try again later.";
+      err.textContent = "Не удалось отправить сообщение. Попробуйте позже.";
       return;
     }
     form.reset();
     close();
-    showToast("Message successfully transmitted");
+    showToast("Сообщение успешно отправлено");
   });
 }

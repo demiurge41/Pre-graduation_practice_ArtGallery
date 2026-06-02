@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = BASE_DIR / "static"
 UPLOAD_DIR = STATIC_DIR / "uploads"
 
-app = FastAPI(title="Art Gallery Information System", debug=settings.debug)
+app = FastAPI(title="Информационная система художественной галереи", debug=settings.debug)
 app.add_middleware(
     SessionMiddleware,
     secret_key=settings.secret_key,
@@ -31,7 +31,7 @@ def _html_page(filename: str) -> HTMLResponse | FileResponse:
     path = STATIC_DIR / filename
     if path.exists():
         return FileResponse(path)
-    return HTMLResponse(f"<h1>Coming soon: {filename}</h1>", status_code=200)
+    return HTMLResponse(f"<h1>Скоро: {filename}</h1>", status_code=200)
 
 
 @app.get("/", response_class=HTMLResponse)

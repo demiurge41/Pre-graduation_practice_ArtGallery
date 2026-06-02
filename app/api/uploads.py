@@ -18,10 +18,10 @@ async def upload_image(
     _: object = Depends(require_staff),
 ):
     if file.content_type not in ALLOWED:
-        raise HTTPException(status_code=400, detail="Invalid image type")
+        raise HTTPException(status_code=400, detail="Недопустимый тип изображения")
     data = await file.read()
     if len(data) > MAX_BYTES:
-        raise HTTPException(status_code=400, detail="File too large (max 8MB)")
+        raise HTTPException(status_code=400, detail="Файл слишком большой (макс. 8 МБ)")
     ext = {".jpg": "jpg", "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif"}.get(
         file.content_type, "jpg"
     )

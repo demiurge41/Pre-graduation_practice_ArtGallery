@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artwork — Art Gallery</title>
+  <title>Работа — Художественная галерея</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" />
   <link rel="stylesheet" href="/static/css/artgallery.css?v=8" />
 </head>
 <body class="page-template" data-page="artwork">
   <div id="ag-header-mount"></div>
-  <button type="button" id="ag-menu-toggle" class="ag-mobile-toggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+  <button type="button" id="ag-menu-toggle" class="ag-mobile-toggle" aria-label="Меню"><i class="fa-solid fa-bars"></i></button>
   <div id="ag-mobile-drawer" class="ag-mobile-drawer" aria-hidden="true">
     <div class="ag-mobile-drawer__panel">
-      <a href="/gallery">← Gallery</a>
-      <button type="button" data-close-drawer>Close</button>
+      <a href="/gallery">← Галерея</a>
+      <button type="button" data-close-drawer>Закрыть</button>
     </div>
   </div>
 
   <main class="ag-page" id="artwork-root">
     <div class="ag-wrap ag-artwork-detail">
-      <a href="/gallery" class="ag-artwork-detail__back">← Back to gallery</a>
+      <a href="/gallery" class="ag-artwork-detail__back">← Назад в галерею</a>
       <div class="ag-artwork-detail__grid">
         <figure class="ag-artwork-detail__figure card-surface">
           <img id="artwork-image" src="" alt="" />
@@ -33,15 +33,15 @@
             <div class="ag-artwork-detail__meta" id="artwork-meta" role="list"></div>
           </header>
           <section class="ag-artwork-detail__section">
-            <h2 class="ag-artwork-detail__heading">Description</h2>
+            <h2 class="ag-artwork-detail__heading">Описание</h2>
             <p class="ag-artwork-detail__text" id="artwork-description"></p>
           </section>
           <section class="ag-artwork-detail__section">
-            <h2 class="ag-artwork-detail__heading">Creation story</h2>
+            <h2 class="ag-artwork-detail__heading">История создания</h2>
             <p class="ag-artwork-detail__text" id="artwork-story"></p>
           </section>
           <section id="artist-bio-block" class="ag-artwork-detail__section" hidden>
-            <h2 class="ag-artwork-detail__heading">About the artist</h2>
+            <h2 class="ag-artwork-detail__heading">Об авторе</h2>
             <p class="ag-artwork-detail__text" id="artwork-artist-bio"></p>
           </section>
         </div>

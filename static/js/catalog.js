@@ -76,13 +76,13 @@ function renderGrid(items) {
   const el = grid();
   if (!el) return;
   if (!items.length) {
-    el.innerHTML = '<p class="empty-state">No artworks match your filters.</p>';
+    el.innerHTML = '<p class="empty-state">Нет работ по выбранным фильтрам.</p>';
     return;
   }
   el.innerHTML = items
     .map(
       (a) => `
-    <a class="ag-art-card" href="/gallery/${a.id}" aria-label="View ${escapeHtml(a.title)}">
+    <a class="ag-art-card" href="/gallery/${a.id}" aria-label="Открыть: ${escapeHtml(a.title)}">
       <img src="${a.image_url || ""}" alt="${escapeHtml(a.title)}" loading="lazy" data-fallback />
       <div class="ag-art-card__body">
         <p class="ag-art-card__title">${escapeHtml(a.title)}</p>
@@ -106,7 +106,7 @@ function buildFilterUI() {
   const mediumRoots = document.querySelectorAll(".filter-media-root");
 
   const artistHtml =
-    `<label><input type="radio" name="artist" value="${FILTER_ALL}" checked /> All artists</label>` +
+    `<label><input type="radio" name="artist" value="${FILTER_ALL}" checked /> Все художники</label>` +
     allArtists
       .map(
         (ar) =>
@@ -120,7 +120,7 @@ function buildFilterUI() {
 
   const media = [...new Set(allArtworks.map((a) => a.medium).filter(Boolean))];
   const mediumHtml =
-    `<label><input type="radio" name="medium" value="${FILTER_ALL}" checked /> Any medium</label>` +
+    `<label><input type="radio" name="medium" value="${FILTER_ALL}" checked /> Любая техника</label>` +
     media
       .map(
         (m) =>

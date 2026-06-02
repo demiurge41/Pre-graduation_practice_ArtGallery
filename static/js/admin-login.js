@@ -8,7 +8,7 @@ document.getElementById("login-form")?.addEventListener("submit", async (e) => {
   const email = form.email.value.trim();
   const password = form.password.value;
   if (!validateEmail(email)) {
-    err.textContent = "Enter a valid email.";
+    err.textContent = "Введите корректный email.";
     return;
   }
   const res = await fetch("/api/auth/login", {
@@ -18,7 +18,7 @@ document.getElementById("login-form")?.addEventListener("submit", async (e) => {
     body: JSON.stringify({ email, password }),
   });
   if (!res.ok) {
-    err.textContent = "Invalid email or password.";
+    err.textContent = "Неверный email или пароль.";
     return;
   }
   window.location.href = "/gallery.admin";

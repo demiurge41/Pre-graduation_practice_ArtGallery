@@ -2,21 +2,21 @@ import enum
 
 
 class ArtworkStatus(str, enum.Enum):
-    IN_GALLERY = "In Gallery"
-    ON_EXHIBITION = "On Exhibition"
-    IN_STORAGE = "In Storage"
+    IN_GALLERY = "В галерее"
+    ON_EXHIBITION = "На выставке"
+    IN_STORAGE = "На хранении"
 
 
 class ExhibitionStatus(str, enum.Enum):
-    PAST = "Past"
-    CURRENT = "Current"
-    UPCOMING = "Upcoming"
+    PAST = "Прошедшая"
+    CURRENT = "Текущая"
+    UPCOMING = "Предстоящая"
 
 
 class InquiryStatus(str, enum.Enum):
-    NEW = "New"
-    READ = "Read"
-    RESPONDED = "Responded"
+    NEW = "Новое"
+    READ = "Прочитано"
+    RESPONDED = "Отвечено"
 
 
 class UserRole(str, enum.Enum):
